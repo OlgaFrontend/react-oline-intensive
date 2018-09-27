@@ -1,0 +1,7 @@
+.feed {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--paletteColor3);
+  min-height: 100vh;
+}
