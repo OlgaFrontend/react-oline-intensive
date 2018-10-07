@@ -12,7 +12,7 @@ import avatar from 'theme/assets/lisa';
 const options = {
     avatar,
     currentUserFirstName: 'Lisa',
-    currentUserLastName: 'Simpson'
+    currentUserLastName: 'Simpson',
 }
   
 @hot(module)
@@ -20,7 +20,7 @@ export default class App extends Component {
     render () {
         return (
             <Provider value = { options }> 
-                <Feed />
+                <Feed { ...options } />
             </Provider>
         )
     }
