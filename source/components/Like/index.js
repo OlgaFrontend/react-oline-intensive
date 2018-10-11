@@ -3,9 +3,13 @@ import React, { Component } from 'react';
 import { string, func, arrayOf, shape } from 'prop-types';
 import cx from 'classnames';
 
+//Components
+import { withProfile } from 'components/HOC/withProfile';
+
 //Instruments
 import Styles from './style.m.css';
 
+@withProfile
 export default class Like extends Component {
   static propTypes = {
     _likePost: func.isRequired,
@@ -19,41 +23,29 @@ export default class Like extends Component {
     ).isRequired,
   }
 
-  constructor () {
-    super();
-
-    this._getLikedByMe = this._getLikedByMe.bind(this);
-    this._getLikeStyles = this._getLikeStyles.bind(this);
-    this._likePost = this._likePost.bind(this);
-    this._showLikers = this._showLikers.bind(this);
-    this._hideLikers = this._hideLikers.bind(this);
-    this._getLikersList = this._getLikersList.bind(this);
-    this._getLikesDescription = this._getLikesDescription.bind(this);
-  }
-
   state = {
     showLikers: false,
   }
 
-  _showLikers () {
+  _showLikers = () => {
     this.setState({
       showLikers: true,
     });
   }
 
-  _hideLikers () {
+  _hideLikers = () => {
     this.setState({
       showLikers: false,
     });
   }
 
-  _likePost () {
+  _likePost = () => {
     const { _likePost, id } = this.props;
 
     _likePost(id);
   }
 
-  _getLikedByMe () {
+  _getLikedByMe = () => {
     const { currentUserFirstName, currentUserLastName, likes } = this.props;
 
     return likes.some(({ firstName, lastName }) => {
@@ -63,7 +55,7 @@ export default class Like extends Component {
     });
   }
 
-  _getLikeStyles () {
+  _getLikeStyles = () => {
     const likedByMe = this._getLikedByMe();
 
     return cx(Styles.icon, {
@@ -71,7 +63,7 @@ export default class Like extends Component {
     });
   }
 
-  _getLikersList () {
+  _getLikersList = () => {
     const { showLikers } = this.state;
     const { likes } = this.props;
 
@@ -82,7 +74,7 @@ export default class Like extends Component {
     return likes.length && showLikers ? <ul>{likeJSX}</ul> : null;
   }
 
-  _getLikesDescription () {
+  _getLikesDescription = () => {
     const { likes, currentUserLastName, currentUserFirstName } = this.props;
 
     const likedByMe = this._getLikedByMe();
