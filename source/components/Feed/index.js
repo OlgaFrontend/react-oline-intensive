@@ -56,13 +56,18 @@ export default class Feed extends Component {
 
     socket.on('like', (postJSON) => {
       const { data: likedPost, meta } = JSON.parse(postJSON);
-
-      this.setState(({ posts }) => ({
-        posts: posts.map(
-          (post) => post.id === likedPost.id ? likedPost : post,
-        ),
-        isPostFetching: false,
-      }));
+      
+      if(
+        `${currentUserFirstName} ${currentUserLastName}` !==
+        `${meta.authorFirstName} ${meta.authorLastName}`
+      ) {
+        this.setState(({ posts }) => ({
+          posts: posts.map(
+            (post) => post.id === likedPost.id ? likedPost : post,
+          ),
+          isPostFetching: false,
+        }));
+      }
     });
 
   }
