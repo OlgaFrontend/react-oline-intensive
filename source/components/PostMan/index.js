@@ -12,11 +12,11 @@ import { withProfile } from 'components/HOC/withProfile';
 const PostMan = (props) => {
 
   const _animatePostManEnter = (postman) => {
-    fromTo(postman, 1, { x: '100%' }, { x: '0%' });
+    fromTo(postman, 1, { x: '120%' }, { x: '0%' });
   }
 
   const _animatePostManEntered = (postman) => {
-    fromTo(postman, 2, { opacity: 1 }, { opacity: 0 });
+    fromTo(postman, 1, { x: '0' }, { x: '120%' });
   }
 
   return (
