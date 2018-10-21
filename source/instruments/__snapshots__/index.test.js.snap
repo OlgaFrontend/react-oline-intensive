@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`instruments:  getFullApiUrl function should return an FullApiUrl 1`] = `"apiUrl/GROUP_ID"`;
+
+exports[`instruments:  sum function should return an addition of two arguments which were input in function 1`] = `8`;
