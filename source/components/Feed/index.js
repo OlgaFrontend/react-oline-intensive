@@ -1,6 +1,6 @@
 //Core
 import React, { Component } from 'react';
-import { Transition } from 'react-transition-group';
+import { Transition, CSSTransition, TransitionGroup } from 'react-transition-group';
 import { fromTo } from 'gsap';
 
 //Components
@@ -11,6 +11,7 @@ import Post from 'components/Post';
 import StatusBar from 'components/StatusBar';
 import Spinner from 'components/Spinner';
 import PostMan from 'components/PostMan';
+import Counter from 'components/Counter';
 
 //Instruments
 import Styles from './style.m.css';
@@ -59,13 +60,18 @@ export default class Feed extends Component {
 
     socket.on('like', (postJSON) => {
       const { data: likedPost, meta } = JSON.parse(postJSON);
-
-      this.setState(({ posts }) => ({
-        posts: posts.map(
-          (post) => post.id === likedPost.id ? likedPost : post,
-        ),
-        isPostFetching: false,
-      }));
+      
+      if(
+        `${currentUserFirstName} ${currentUserLastName}` !==
+        `${meta.authorFirstName} ${meta.authorLastName}`
+      ) {
+        this.setState(({ posts }) => ({
+          posts: posts.map(
+            (post) => post.id === likedPost.id ? likedPost : post,
+          ),
+          isPostFetching: false,
+        }));
+      }
     });
 
   }
@@ -172,14 +178,24 @@ export default class Feed extends Component {
 
     const postsJSX = posts.map((post, id) => {
         return (
-                <Catcher key = { post.id }>
+            <CSSTransition  
+                classNames = { { 
+                  enter:       Styles.postInStart, 
+                  enterActive: Styles.postInEnd,
+                  exit:        Styles.postOutStart,
+                  exitActive:  Styles.postOutEnd,
+                } }
+                key = { post.id } 
+                timeout = { { enter: 500, exit: 400 } }>
+                <Catcher>
                     <Post  
                         { ...post } 
                         _likePost = { this._likePost } 
                         _removePost = { this._removePost }
                     />
                 </Catcher>
-                )
+            </CSSTransition>
+        )
     });
 
     return (
@@ -202,6 +218,8 @@ export default class Feed extends Component {
               onEntered = { this._animatePostManEntered }>
               <PostMan />
           </Transition>
+          <Counter count = { postsJSX.length }/>
+          <TransitionGroup>{postsJSX}</TransitionGroup>
       </section>
     )
   } 
