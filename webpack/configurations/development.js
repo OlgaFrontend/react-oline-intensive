@@ -21,7 +21,7 @@ export const generateDevelopmentConfiguration = () =>
             mode:  'development',
             entry: {
                 // ? Фикс периодического дисконнекта devserver. Убрать после перехода на webpack-serve
-                client: 'webpack-dev-server/client?http://localhost:3000',
+                client: 'webpack-dev-server/client?http://localhost:3002',
             },
             output: {
                 filename: 'js/[name].[hash:5].js',
@@ -32,7 +32,7 @@ export const generateDevelopmentConfiguration = () =>
                 historyApiFallback: true,
                 host:               '0.0.0.0',
                 overlay:            true,
-                port:               3000,
+                port:               3002,
                 stats:              'errors-only',
                 useLocalIp:         true,
             },

@@ -159,6 +159,14 @@ export default class Feed extends Component {
       { opacity: 1, rotationX: 0 });
   }
 
+  _animatePostManEnter = (postman) => {
+    fromTo(postman, 1, { x: '120%' }, { x: '0%' });
+  }
+
+  _animatePostManEntered = (postman) => {
+    fromTo(postman, 2, { x: '0%' }, { x: '120%' });
+  }
+
   render () {
     const { posts, isPostFetching } = this.state;
 
@@ -182,13 +190,18 @@ export default class Feed extends Component {
               appear
               in
               timeout = { 4000 }
-              onEnter = { this._animateComposerEnter }
-              onEntered = { () => console.log('entered') }
-              onEntering = { () => console.log('entering') }>
+              onEnter = { this._animateComposerEnter }>
               <Composer _createPost = { this._createPost }/>
           </Transition>
           {postsJSX}
-          <PostMan />
+          <Transition
+              appear
+              in
+              timeout = { 4000 }
+              onEnter = { this._animatePostManEnter }
+              onEntered = { this._animatePostManEntered }>
+              <PostMan />
+          </Transition>
       </section>
     )
   } 
