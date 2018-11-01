@@ -8,9 +8,8 @@
     height: 42px;
     border-bottom: #29487d;
     background-color: #4267b2;
-    margin-bottom: 20px;
 
-    & button {
+    & a {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -24,7 +23,11 @@
         cursor: pointer;
         border-radius: 4px;
         outline: none;
-
+        border: 1px solid var(--paletteColor2);
+        text-decoration: none;
+        min-height: 30px;
+        min-width: 140px;
+        
         & img {
             width: 24px;
             height: 24px;
