@@ -4,6 +4,7 @@
   align-items: center;
   background-color: var(--paletteColor3);
   min-height: 100vh;
+  padding-top: 20px;
 
   & .postInStart {
     transform: scale(.5);
